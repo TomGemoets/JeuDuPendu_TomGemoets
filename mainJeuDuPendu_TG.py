@@ -13,12 +13,15 @@ def choix_du_fichier():
 
     elif(choixFichier.lower() == 'd'):
         return creer_listeMots("mots_pendu.txt")
-
-def creer_listeMots(nomDuFichier): #Ouvre le fichier en lecture et créer une liste àpd de ces éléments
+        
+#Ouvre le fichier en lecture et créer une liste àpd de ces éléments
+#nouvel apprentissage : https://www.freecodecamp.org/news/with-open-in-python-with-statement-syntax-example/
+def creer_listeMots(nomDuFichier): 
     with open(nomDuFichier, "r", encoding="utf-8") as f: # Lis toutes les lignes et supprime les caractères de fin de ligne
         mots = [ligne.strip() for ligne in f]
         return mots
 
+#sélection aléatoire d'un mot à partir de la liste de mots
 def choix_mot_aleatoire(listeMots):
     return random.choice(listeMots)
 
@@ -36,6 +39,8 @@ def creer_list_joueur(nbDeLettres):
 def demander_rentrer_une_lettre():
     lettre = input('Quelle lettre voulez-vous essayer ? : ')
 
+#remplace les caractères spéciaux par leur équivalent (exemples : à --> a, é --> e, è --> e)
+#nouvel apprentissage : https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string
 def retirer_accents(mot):
     return ''.join(c for c in unicodedata.normalize('NFD', mot)
                    if unicodedata.category(c) != 'Mn')
